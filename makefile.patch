@@ -1,0 +1,46 @@
+--- Makefile.in.orig	2017-10-02 21:20:22.125415758 +0800
++++ Makefile.in	2017-10-02 21:26:48.665999222 +0800
+@@ -304,7 +304,7 @@
+ 
+ pkgIndex.tcl-hand:
+ 	(echo 'package ifneeded $(PACKAGE_NAME) $(PACKAGE_VERSION) \
+-	    [list load [file join $$dir $(PKG_LIB_FILE)]]'\
++           [list load $(PKG_LIB_FILE)]'\
+ 	) > pkgIndex.tcl
+ 
+ #========================================================================
+@@ -414,25 +414,25 @@
+ #========================================================================
+ 
+ install-lib-binaries:
+-	@mkdir -p $(DESTDIR)$(pkglibdir)
++	@mkdir -p $(DESTDIR)$(libdir)
+ 	@list='$(lib_BINARIES)'; for p in $$list; do \
+ 	  if test -f $$p; then \
+-	    echo " $(INSTALL_PROGRAM) $$p $(DESTDIR)$(pkglibdir)/$$p"; \
+-	    $(INSTALL_PROGRAM) $$p $(DESTDIR)$(pkglibdir)/$$p; \
++	    echo " $(INSTALL_PROGRAM) $$p $(DESTDIR)$(libdir)/$$p"; \
++	    $(INSTALL_PROGRAM) $$p $(DESTDIR)$(libdir)/$$p; \
+ 	    stub=`echo $$p|sed -e "s/.*\(stub\).*/\1/"`; \
+ 	    if test "x$$stub" = "xstub"; then \
+-		echo " $(RANLIB_STUB) $(DESTDIR)$(pkglibdir)/$$p"; \
+-		$(RANLIB_STUB) $(DESTDIR)$(pkglibdir)/$$p; \
++		echo " $(RANLIB_STUB) $(DESTDIR)$(libdir)/$$p"; \
++		$(RANLIB_STUB) $(DESTDIR)$(libdir)/$$p; \
+ 	    else \
+-		echo " $(RANLIB) $(DESTDIR)$(pkglibdir)/$$p"; \
+-		$(RANLIB) $(DESTDIR)$(pkglibdir)/$$p; \
++		echo " $(RANLIB) $(DESTDIR)$(libdir)/$$p"; \
++		$(RANLIB) $(DESTDIR)$(libdir)/$$p; \
+ 	    fi; \
+ 	    ext=`echo $$p|sed -e "s/.*\.//"`; \
+ 	    if test "x$$ext" = "xdll"; then \
+ 		lib=`basename $$p|sed -e 's/.[^.]*$$//'`.lib; \
+ 		if test -f $$lib; then \
+-		    echo " $(INSTALL_DATA) $$lib $(DESTDIR)$(pkglibdir)/$$lib"; \
+-	            $(INSTALL_DATA) $$lib $(DESTDIR)$(pkglibdir)/$$lib; \
++		    echo " $(INSTALL_DATA) $$lib $(DESTDIR)$(libdir)/$$lib"; \
++	            $(INSTALL_DATA) $$lib $(DESTDIR)$(libdir)/$$lib; \
+ 		fi; \
+ 	    fi; \
+ 	  fi; \
