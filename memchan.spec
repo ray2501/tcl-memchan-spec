@@ -9,7 +9,7 @@ Name:           memchan
 Version:        2.3
 Summary:        Memory Channels in Tcl
 Release:        0
-License:        BSD License 
+License:        BSD-3-Clause
 Group:          Development/Libraries/Tcl
 Url:            https://sourceforge.net/projects/memchan/
 BuildRequires:  autoconf
